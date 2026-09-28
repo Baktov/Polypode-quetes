@@ -13,6 +13,7 @@ local P = Polypode -- dépendance obligatoire (## Dependencies: Polypode), charg
 -- l'équipe ». Les journaux viennent du Polypode de chaque membre (QLOG, Sync.lua de Polypode) : un membre
 -- dont aucun journal n'a été reçu est « inconnu ». Les quêtes qui manquent au plus de
 -- membres viennent en premier. Rafraîchie à chaque journal reçu ou modifié. Échap la ferme.
+-- Clic sur une quête de son propre journal : l'ouvre dans le journal de quêtes.
 
 local FRAME_WIDTH, FRAME_HEIGHT = 440, 320
 
@@ -87,8 +88,41 @@ local function FormatQuest(item)
 	return text
 end
 
+-- Vrai si la quête est dans le journal du personnage joué (seules celles-ci s'ouvrent en détail).
+local function InOwnLog(questID)
+	return C_QuestLog.GetLogIndexForQuestID and C_QuestLog.GetLogIndexForQuestID(questID) ~= nil
+end
+
+-- Clic sur une quête : ouvre le journal de quêtes (carte du monde) sur son détail ; journal simple
+-- si l'API manque. La fenêtre se ferme, pour ne pas masquer la carte (strate supérieure).
+local function OpenInQuestLog(item)
+	if not InOwnLog(item.questID) then
+		UIErrorsFrame:AddMessage("« " .. item.title .. " » n'est pas dans votre journal de quêtes.", 1, 0.1, 0.1)
+		return
+	end
+	frame:Hide()
+	-- Différé d'une image : la carte s'ouvre après le traitement du clic.
+	C_Timer.After(0, function()
+		if QuestMapFrame_OpenToQuestDetails then
+			QuestMapFrame_OpenToQuestDetails(item.questID)
+		else
+			if C_QuestLog.SetSelectedQuest then
+				C_QuestLog.SetSelectedQuest(item.questID)
+			end
+			if ToggleQuestLog then
+				ToggleQuestLog()
+			end
+		end
+	end)
+end
+
 local function QuestTooltip(item)
 	local lines = { item.title, "|cff999999Quête n° " .. item.questID .. "|r" }
+	if InOwnLog(item.questID) then
+		lines[#lines + 1] = "Clic : ouvrir dans le journal de quêtes"
+	else
+		lines[#lines + 1] = "|cff999999Absente de votre journal (ne s'ouvre pas au clic)|r"
+	end
 	local function Section(title, names)
 		if #names > 0 then
 			lines[#lines + 1] = " "
@@ -136,7 +170,12 @@ local function Build()
 	listPanel = P.CreatePanel(frame, "")
 	listPanel:SetPoint("TOPLEFT", 12, -36)
 	listPanel:SetPoint("BOTTOMRIGHT", -12, 12)
-	P.CreateScrollList(listPanel, FormatQuest, nil, { tooltip = QuestTooltip })
+	P.CreateScrollList(listPanel, FormatQuest, nil, {
+		tooltip = QuestTooltip,
+		onClick = function(item)
+			OpenInQuestLog(item)
+		end,
+	})
 
 	P.ui.teamQuestsFrame = frame
 	P.ui.teamQuestsPanel = listPanel
