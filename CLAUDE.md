@@ -13,7 +13,7 @@ contenu de taille variable défile, Retail (120000) et WoW Forever (16001).
 | Fichier | Rôle |
 |---|---|
 | `Polypode_Quetes.toc` | `## Dependencies: Polypode` ; pas de SavedVariables (aucune option) |
-| `TeamQuests.lua` | Fenêtre `PolypodeTeamQuestsFrame` (`P.ToggleTeamQuests`, `P.RefreshTeamQuests` — fonctions ajoutées à la table `Polypode`, `P.ui.teamQuestsFrame` / `P.ui.teamQuestsPanel`) : quêtes du leader de l'équipe sélectionnée (`P.GetCharacterQuests`), membres qui ne l'ont pas / l'ont / inconnus, liste défilante (`P.CreateScrollList`), Échap ferme ; clic sur une quête du journal du joueur (`C_QuestLog.GetLogIndexForQuestID`) → `QuestMapFrame_OpenToQuestDetails` (repli `ToggleQuestLog`), fenêtre fermée. Intégration : bouton par `P.AddTitleButton` (`P.ui.questsButton`), commande `P.RegisterSlashCommand("quetes")` + alias `quêtes` |
+| `TeamQuests.lua` | Fenêtre `PolypodeTeamQuestsFrame` (`P.ToggleTeamQuests`, `P.RefreshTeamQuests` — fonctions ajoutées à la table `Polypode`, `P.ui.teamQuestsFrame` / `P.ui.teamQuestsPanel`) : quêtes du leader de l'équipe sélectionnée (`P.GetCharacterQuests`), membres qui ne l'ont pas / l'ont / inconnus, liste défilante (`P.CreateScrollList`), Échap ferme ; clic sur une quête du journal du joueur (`C_QuestLog.GetLogIndexForQuestID`) → `QuestMapFrame_OpenToQuestDetails` (repli `ToggleQuestLog`), fenêtre fermée. Intégration : bouton par `P.AddTitleButton` (`P.ui.questsButton`, `hideInSolo` : masqué en mode solo de Polypode 0.54.0 ; `P.IsSoloMode` → `P.RefreshTeamQuests` ferme la fenêtre, `P.ToggleTeamQuests` refuse), commande `P.RegisterSlashCommand("quetes")` + alias `quêtes` |
 
 ## Dépendances vers Polypode (API publique utilisée)
 

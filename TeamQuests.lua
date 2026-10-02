@@ -190,6 +190,10 @@ function P.RefreshTeamQuests()
 	if not frame or not frame:IsShown() then
 		return
 	end
+	if P.IsSoloMode and P.IsSoloMode() then
+		frame:Hide() -- pas d'équipe en mode solo de Polypode (0.54.0)
+		return
+	end
 	local items, header, emptyText = BuildItems()
 	listPanel.header:SetText(header)
 	listPanel.emptyText:SetText(emptyText)
@@ -198,6 +202,10 @@ end
 
 -- Ouvre / ferme la fenêtre (bouton « Quêtes », /poly quetes).
 function P.ToggleTeamQuests()
+	if P.IsSoloMode and P.IsSoloMode() then
+		UIErrorsFrame:AddMessage("Quêtes de l'équipe : indisponible en mode solo.", 1, 0.1, 0.1)
+		return
+	end
 	if not frame then
 		Build()
 	end
@@ -215,6 +223,7 @@ if P.AddTitleButton then
 	P.AddTitleButton({
 		text = "Quêtes",
 		width = 60,
+		hideInSolo = true, -- sans objet en mode solo (Polypode 0.54.0)
 		onClick = function()
 			P.ToggleTeamQuests()
 		end,

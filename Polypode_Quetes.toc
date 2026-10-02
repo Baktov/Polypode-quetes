@@ -2,7 +2,7 @@
 ## Title: Polypode Quêtes
 ## Notes: Fenêtre « Quêtes de l'équipe » pour Polypode : les quêtes du leader que les membres n'ont pas.
 ## Author: Baktov
-## Version: 1.1.0
+## Version: 1.2.0
 ## Dependencies: Polypode
 ## Category: Polypode
 

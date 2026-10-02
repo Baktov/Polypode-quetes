@@ -35,6 +35,8 @@ acceptée, rendue ou abandonnée) : la fenêtre se met à jour d'elle-même. Un 
 n'a pas été reçu (pas de Polypode, pas encore vu cette session) apparaît comme « inconnu ». Les
 expéditions, objectifs bonus et quêtes cachées ne sont pas listés.
 
+En **mode solo** de Polypode (pas d'équipe), le bouton **Quêtes** disparaît et la fenêtre se ferme.
+
 Cet addon n'a pas d'options. L'acceptation, la validation et le partage automatiques des quêtes
 restent dans Polypode (et dans ses options).
 
@@ -42,5 +44,6 @@ restent dans Polypode (et dans ses options).
 
 ## Version
 
+`1.2.0` : masqué en mode solo de Polypode (0.54.0) : bouton retiré de la fenêtre et de la barre flottante, fenêtre fermée.
 `1.1.0` : clic sur une quête pour l'ouvrir dans le journal de quêtes.
 `1.0.0` : fenêtre « Quêtes de l'équipe » sortie de Polypode 0.48.3.
