@@ -1,8 +1,8 @@
 ## Interface: 120000, 16001
-## Title: Polypode Quêtes
-## Notes: Fenêtre « Quêtes de l'équipe » pour Polypode : les quêtes du leader que les membres n'ont pas.
+## Title: Polypode Quêtes (obsolète)
+## Notes: OBSOLÈTE : les quêtes de l'équipe sont dans Polypode Suivi (bouton « Quêtes »). À désactiver.
 ## Author: Baktov
-## Version: 1.2.0
+## Version: 1.3.0
 ## Dependencies: Polypode
 ## Category: Polypode
 
